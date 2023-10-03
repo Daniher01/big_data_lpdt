@@ -21,7 +21,7 @@ euro_2020_events_with_date = left_join(euro_2020_events, euro_2020_games, by = "
 euro_2020_events_with_date = left_join(euro_2020_events, 
                                        euro_2020_games %>% select(match_id, competition_stage.name), 
                                        by = "match_id")
-
+# nomenclatura recomendada
 euro_2020_events_with_date = euro_2020_events %>% 
                              left_join(euro_2020_games %>% select(match_id, competition_stage.name), 
                                        by = "match_id")
@@ -57,7 +57,6 @@ pressure_p90 = euro_2020_events %>%
 ## para quitar el símbolo % de las columnas que lo tienen 
 premier_per = read_xlsx("data/players_stats_season_21_22_england_premier_league.xlsx", col_types = "text") %>%
   clean_names() %>%
-  rename("player_num" = "x1", "player_name" = "x2") %>%
   mutate(across(c(ends_with("percent"), "chances_percent_of_conversion"), ~as.numeric(str_replace(.x, "%", ""))))
 
 ## para cambiar todos los símbolos "-" de las variables que lo tengan y pasarlo a 0
@@ -67,9 +66,10 @@ columnas_de_texto = c("player_num", "player_name", "position", "nationality", "t
 
 premier_numeric = read_xlsx("data/players_stats_season_21_22_england_premier_league.xlsx", col_types = "text") %>%
   clean_names() %>%
-  rename("player_num" = "x1", "player_name" = "x2") %>%
   mutate(across(c(ends_with("percent"), "chances_percent_of_conversion"), ~as.numeric(str_replace(.x, "%", "")))) %>%
   mutate(across(-columnas_de_texto, ~as.numeric(str_replace(.x, "-", "0"))))
+
+##--------------------------- OPCION PARA OBTENER LOS DATOS P90 A TODAS LAS COLUMNAS NECESARIAS (NUMERICAS) -----------------------------
 
 ## convertir todas las stats numéricas a p90
 otras_columnas_a_remover = c("minutes_played", "age", "weight", "height", "matches_played", "in_stat_index",
@@ -77,7 +77,6 @@ otras_columnas_a_remover = c("minutes_played", "age", "weight", "height", "match
 
 premier_p90 = read_xlsx("data/players_stats_season_21_22_england_premier_league.xlsx", col_types = "text") %>%
   clean_names() %>%
-  rename("player_num" = "x1", "player_name" = "x2") %>%
   mutate(across(c(ends_with("percent"), "chances_percent_of_conversion"), ~as.numeric(str_replace(.x, "%", "")))) %>%
   mutate(across(-columnas_de_texto, ~as.numeric(str_replace(.x, "-", "0")))) %>% 
   mutate(across(-c(columnas_de_texto, otras_columnas_a_remover), ~(.x/minutes_played*90), .names = "{.col}_p90"))
@@ -87,7 +86,7 @@ check_p90 = premier_p90 %>%
 
 
 ## convertir todas las variables numéricas a percentil
-umbral_minimo_MJ = max(premier_p90$minutes_played)*0.3 
+umbral_minimo_MJ = max(premier_p90$minutes_played)*0.3 #umbral minimo de minutos jugador (RECOMENDADO)
   
 premier_p90_percentil = premier_p90 %>% 
   filter(minutes_played >= umbral_minimo_MJ) %>% 
@@ -100,6 +99,7 @@ check_p90_percentil = premier_p90_percentil %>%
 
 ## pero los percentiles deberían calcularse de manera agrupada por otras variables como por ejemplo Posición!
 # group_by() también es útil al usar mutate(), no solo con summarise()
+# aqui el percentil se calcula tambien tomando en cuenta las posiciones de los jugadores
 premier_p90_percentil = premier_p90 %>% 
   filter(minutes_played >= umbral_minimo_MJ) %>%
   group_by(position) %>% 
