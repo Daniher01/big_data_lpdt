@@ -110,6 +110,7 @@ check_p90_percentil = premier_p90_percentil %>%
   arrange(desc(goals_p90_percentil))
 
 
+# -------------------------------------------------------------- ANALISIS DE SIMILITUD ENTRE JUGADORES -----------------------------------------
 
 #### ejemplo de similitud de jugadores aplicando los criterios hasta ahora aprendidos
 
@@ -133,6 +134,8 @@ data = premier_p90_percentil %>%
        select(player_name, metricas)
 
 library(proxy)
+#calcular la distancia entre todos los jugadores seleccionados y el target (en este caso Salah)
+# la distancia coseno se calcula con "cosine"
 sim = simil(x = data %>% select(-player_name), 
             y = target %>% ungroup() %>% select(metricas), 
             method = "cosine")
@@ -143,7 +146,7 @@ output = data %>%
          mutate(player_name_ = player_name)
 
 
-
+# ---------------------------------------------------------------------------------------------------------
 
 #### Corrección por posesión
 
@@ -162,10 +165,11 @@ poss_data <- passes %>%
              mutate(TimeInPoss = ifelse(TimeInPoss > 200, 200, TimeInPoss)) %>% 
              group_by(team = possession_team.name, possession, match_id) %>%
              summarise(n_pass = n(),
-                       poss_time = max(TimeInPoss)) %>% 
+                       poss_time = max(TimeInPoss))
 
 quantile(passes$TimeInPoss, seq(0, 1, 0.001))
 
+# permite tambien calcula el tiempo efectivo de juego
 poss_stats <- poss_data %>%
               group_by(team, match_id) %>%
               summarise(n_poss = n(),
@@ -195,7 +199,7 @@ competitions <- FreeCompetitions()
 partidos = FreeMatches(competitions %>%
                          filter(competition_name == "UEFA Euro"))
 
-eventos <- StatsBombFreeEvents(MatchesDF = partidos)
+eventos <- free_allevents(MatchesDF = partidos)
 eventos_clean = allclean(eventos)
 names(eventos_clean)
 
