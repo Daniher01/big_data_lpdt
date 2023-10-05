@@ -1,0 +1,6 @@
+player_name,expected_assists,x_g_expected_goals,attacking_challenges,air_challenges,dribbles,crosses,passes,lost_balls,ball_interceptions,ball_recoveries,sim_percentile_cosine,player_name_
+Heung-Min Son,12,14,307,73,116,53,1214,232,58,47,1.0000000000000002,Heung-Min Son
+Leandro Trossard,4,8,326,54,122,52,1182,228,69,43,0.9995835573484921,Leandro Trossard
+Philippe Coutinho,4,4.3,158,32,68,14,640,107,28,24,0.9994077007071351,Philippe Coutinho
+James Maddison,7,7,235,36,114,41,1065,200,43,42,0.9991349950187629,James Maddison
+Roberto Firmino,2,5.8,129,45,35,10,494,97,32,19,0.9988757403910966,Roberto Firmino

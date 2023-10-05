@@ -12,7 +12,7 @@ top_20_premier = premier %>%
             arrange(desc(xG_xA_p90)) %>%
             head(20)
 
-write_csv(top_20_premier, "ejercicio_M03/top20_premier_xG_xA")
+write_csv(top_20_premier, "ejercicio_M03/top20_premier_xG_xA.csv")
 
 #------------EJERCICIO 2-----------------------------
 euro_events = read_csv("data/statsbomb_eventing_data_euro_2020.csv")
@@ -32,4 +32,4 @@ xG_tiros = euro_events %>%
 
 table(euro_events$shot.outcome.name)
 
-write_csv(top_20_premier, "ejercicio_M03/top_20_premier_precision_opponent_half")
+write_csv(top_20_premier, "ejercicio_M03/top_20_premier_precision_opponent_half.csv")
