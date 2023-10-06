@@ -110,6 +110,8 @@ ggplot(euro_2020_events, aes(x = location.y)) + geom_density()
 
 ### Scatterplot
 
+# ------------------------- CALCULO DE XG A FACOR Y XG EN CONTRA ---------------------------------
+
 # datos: xG a favor y en contra p90 de cada equipo por partido de la Euro 2020
 euro_2020_games = read_csv("data/statsbomb_info_partidos_euro_2020.csv")
 xg_favor = euro_2020_events %>% 
@@ -144,7 +146,6 @@ base2 + geom_point(size = 3, shape = 21, fill = "darkblue", alpha = 0.4)
 
 # mapear una variable a un aes de ggplot2
 base2 + geom_point(aes(fill = competition_stage.name), size = 3, shape = 21, alpha = 0.7)
-
 
 # cambiar escala de colores y título de leyenda
 base2 +
