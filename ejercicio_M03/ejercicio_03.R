@@ -32,4 +32,5 @@ xG_tiros = euro_events %>%
 
 table(euro_events$shot.outcome.name)
 
-write_csv(top_20_premier, "ejercicio_M03/top_20_premier_precision_opponent_half.csv")
+
+write_csv(top_10_euro, "ejercicio_M03/top_20_premier_precision_opponent_half.csv")
