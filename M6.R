@@ -283,3 +283,6 @@ ggplot(df_selected, aes(x = metric, y = percentile)) +
 
 ggsave("radar_Salah.png", height = 7, width = 7)
 
+euro_filtered = euro_2020_events %>% filter(shot.outcome.name != "Blocked")
+
+summary(euro_filtered$shot.statsbomb_xg)
