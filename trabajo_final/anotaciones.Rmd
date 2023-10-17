@@ -7,17 +7,17 @@
 
 ### metricas
 
-- xA p90
-- goles p90
-- xG p90
-- duelos ganados en ataque p90
-- duelos aereos ganados p90
-- regates exitosos p90
-- posibilidades exitosas p90 *
-- cruces exactos p90 *
-- pases p90
-- balones recuperados en campo rival p90
-- balones interceptados p90
+- xA 
+- goles 
+- xG 
+- duelos ofensivos ganados
+- duelos aereos ganados 
+- regates exitosos 
+- ocasiones exitosas
+- centros precisos
+- pases 
+- recuperaciones en campo rival
+- intercepciones
 
 
 ### metodo para rankear jugadores

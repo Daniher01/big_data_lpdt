@@ -78,7 +78,7 @@ output = data %>%
   mutate(player_name_ = player_name)
 
 
-# ------------------------------
+# ------------------------------ 
 
-
+# TODO refiltrar jugadores que tengan la cantidad de mintuos mas parecidos a richarlison
 
