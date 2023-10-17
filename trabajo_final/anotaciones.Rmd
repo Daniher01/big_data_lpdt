@@ -1,0 +1,29 @@
+# Justifiaciones
+
+### Posicion
+
+- en las 8 jornadas de la temporada actual (a fecha de este analisis) han jugado con un solo delantero centro 
+- richardlison juega solo de delantero centro
+
+### metricas
+
+- xA p90
+- goles p90
+- xG p90
+- duelos ganados en ataque p90
+- duelos aereos ganados p90
+- regates exitosos p90
+- posibilidades exitosas p90 *
+- cruces exactos p90 *
+- pases p90
+- balones recuperados en campo rival p90
+- balones interceptados p90
+
+
+### metodo para rankear jugadores
+
+POSIBLEMENTE
+
+- obtener datos p90 y percentil por posicion de las metricas de todos los jugadores de la premier
+- filtrar el data set con las necesidades del club
+- ya con un data set filtrado hacer la similitud de jugadores con la distancia coseno
