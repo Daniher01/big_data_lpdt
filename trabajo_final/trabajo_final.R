@@ -184,8 +184,12 @@ generar_grafico <- function(df = df_selected, player, color_player ){
           plot.margin = margin(5, 2, 2, 2))
 }
 
-generar_grafico(player = target, color_player = color_target)
-generar_grafico(player = player_1, color_player = color_player_1)
-generar_grafico(player = player_2, color_player = color_player_2)
-generar_grafico(player = player_3, color_player = color_player_3)
+target_plot = generar_grafico(player = target, color_player = color_target)
+player_1_plot = generar_grafico(player = player_1, color_player = color_player_1)
+player_2_plot = generar_grafico(player = player_2, color_player = color_player_2)
+player_3_plot = generar_grafico(player = player_3, color_player = color_player_3)
 
+ggsave(glue("trabajo_final/radar__{target$player_name[1]}.png"), plot = target_plot, height = 7, width = 10)
+ggsave(glue("trabajo_final/radar__{player_1$player_name[1]}.png"), plot = player_1_plot, height = 7, width = 10)
+ggsave(glue("trabajo_final/radar__{player_2$player_name[1]}.png"), plot = player_2_plot, height = 7, width = 10)
+ggsave(glue("trabajo_final/radar__{player_3$player_name[1]}.png"), plot = player_3_plot, height = 7, width = 10)
