@@ -27,3 +27,5 @@ POSIBLEMENTE
 - obtener datos p90 y percentil por posicion de las metricas de todos los jugadores de la premier
 - filtrar el data set con las necesidades del club
 - ya con un data set filtrado hacer la similitud de jugadores con la distancia coseno
+- analizando los jugadores, para seleccionar solo a 3 jugadores, se tomó más en cuenta su capacidad de crear peligro (xG) y de hacer goles (goles_p90) pero que hayan jugador una cantidad de partidos parecida a richardlison en comparación a las otras métricas ofensivas
+- los 3 jugadores seleccionados tienen más del 80% de similitud con richardlison
