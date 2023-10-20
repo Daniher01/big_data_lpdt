@@ -135,7 +135,6 @@ df_selected$metric = factor(df_selected$metric,
                                        "duelos ofensivos\nganados", "ocasiones exitosas", "regates exitosos", 
                                        "xG", "goles"))
 
-# TODO
 target = df_selected %>% filter(player_name == players_selected[1])
 color_target = "#023e8a"
 player_1 = df_selected %>% filter(player_name == players_selected[2])
@@ -149,7 +148,6 @@ color_player_3 = "#8856a7"
 generar_grafico <- function(df = df_selected, player, color_player ){
 
   ggplot(df, aes(x = metric, y = percentil)) +
-    #geom_bar(data = player, fill = color_player, stat = "identity", width = 1,  alpha = 0.3) +
     
     geom_bar(aes(y = 1), fill = color_player, stat = "identity", 
              width = 1, colour = "white", alpha = 0.3, linetype = "dashed") +                                                                          
@@ -164,10 +162,8 @@ generar_grafico <- function(df = df_selected, player, color_player ){
     
     geom_label(data = player, aes(label = round(p90, 2)), fill = "#e9d8a6", size = 2,color= "black", show.legend = FALSE) +
     
-    labs(fill = "",   
-         caption = glue("Percentiles respecto a jugadores de la misma posición con al menos {round(max(premier_clean$minutes_played, na.rm = T)*0.3, 0)} min. jugados\n\nViz: Daniel Hernandez & LPDT  |  Data: Instat"),     
-         title = glue("{player$player_name[1]} ({player$team[1]})"),
-         subtitle = glue("Premier League 21/22 | Estadísticas cada 90 min.")) +
+    labs(fill = "",
+         title = glue("{player$player_name[1]} ({player$team[1]})")) +
     theme_minimal() +                                                                     
     theme(plot.background = element_rect(fill = "white", color = "white"),
           panel.background = element_rect(fill = "white", color = "white"),
@@ -184,6 +180,8 @@ generar_grafico <- function(df = df_selected, player, color_player ){
           plot.margin = margin(5, 2, 2, 2))
 }
 
+#------------------------------ PREPARAR DATOS PARA EL REPORTE ---------------------------------
+
 target_plot = generar_grafico(player = target, color_player = color_target)
 player_1_plot = generar_grafico(player = player_1, color_player = color_player_1)
 player_2_plot = generar_grafico(player = player_2, color_player = color_player_2)
@@ -193,3 +191,13 @@ ggsave(glue("trabajo_final/radar__{target$player_name[1]}.png"), plot = target_p
 ggsave(glue("trabajo_final/radar__{player_1$player_name[1]}.png"), plot = player_1_plot, height = 7, width = 10)
 ggsave(glue("trabajo_final/radar__{player_2$player_name[1]}.png"), plot = player_2_plot, height = 7, width = 10)
 ggsave(glue("trabajo_final/radar__{player_3$player_name[1]}.png"), plot = player_3_plot, height = 7, width = 10)
+
+
+
+players_df = players_filtrados %>%
+            left_join(output %>% select(player_name, sim_percentile_cosine), by = "player_name") %>%
+            select(c(player_name, age, team, position, minutes_played, valor_millones_euros, sim_percentile_cosine)) %>%
+            filter(player_name %in% players_selected)
+
+players_df <- players_df[match(players_selected, players_df$player_name), ]
+
